@@ -1,1 +1,1 @@
-# Timed-quiz.js
+# Timed-quiz
