@@ -15,8 +15,8 @@ const questions = [
   },
   {
     question: "Console.log does what?",
-    choices:["shows you all the work you have done", "outputs a message to the web console", "allows you to make changing inside web browser"],
-    answer:"outputs a message to the web console"
+    choices:["Shows you all the work you have done", "Outputs a message to the web console", "Allows you to make changing inside web browser"],
+    answer:"Outputs a message to the web console"
   },
   {
     question:"When using a querySelector method what is used for ID",
@@ -25,10 +25,34 @@ const questions = [
   },
   {
     question: "when I need to declare a variable, what does so?",
-    choices: ["declare", "newVariable", "var"],
+    choices: ["Declare", "NewVariable", "Var"],
     answer: "var"
   },
-  
+  {
+    question: "JavaScript is a __",
+    choices: ["Styling language", "Markup language", "Programming language"],
+    answer: "Programming language"
+  },
+  {
+    question: "In JavaScript === compares values and types",
+    choices: ["True", "False"],
+    answer: "True"
+  },
+  {
+    question: "To exit a loop in JavaScript, which statement is used?",
+    choices: ["Return", "parentNode", "Break", "exit"],
+    answer: "Break"
+  },
+  {
+    question: "Character is not a data type in JavaScript.",
+    choices: ["True", "False"],
+    answer: "True"
+  },
+  {
+    questions: "Which answer helps me pull an item from a document?",
+    choices: ["document.createElement(file)", "document.getElementId(file)", "document.pullElementId(file)"],
+    answer: "document.getElementID(file)"
+  }
 ];
 
 const quizContainer = document.getElementById("container");
@@ -37,20 +61,27 @@ const quizInstructions = document.getElementById("quiz-instructions");
 const questionElement = document.getElementById("quiz-questions");
 const answersElement = document.getElementById("quiz-answers");
 
+// Inserted "Timer:" and seconds for my countdown timer of 60 seconds
 startButton.addEventListener("click", function() {
   countdownTimer = setInterval(function() {
-    
     if (timeleft > 0) {
       timeleft--;
-      document.getElementById("timer").innerHTML = timeleft; 
+// Needed to start a new conditional statement for when the timer gets to 1, instead of saying 1 seconds it'll read 1 second
+      if (timeleft === 1) {
+        document.getElementById("timer").textContent = "Timer: " + timeleft + " second";
+      } else {
+        document.getElementById("timer").textContent = "Timer: " + timeleft + " seconds";
+      }
     } else {
       clearInterval(countdownTimer);
-      alert("Quiz timer up!");
+      alert("Quiz timer is up");
     }
   }, 1000);
-// Need to call startQuiz direct to eliminate the double clicking problem I was having
+
+  // Need to call startQuiz direct to eliminate the double clicking problem I was having
   startQuiz();
 });
+
 
 function startQuiz() {
   startButton.style.display = "none";
@@ -76,12 +107,31 @@ function displayQuestion() {
 
 function checkAnswer(choice, answer) {
   if (choice === answer) {
-    alert("Correct!");
+   // Instead of an alert message for correct or wrong answers I want something more subtle
+   let message = document.createElement("answer");
+    message.textContent = "Correct!";
+    message.style.color = "green";
+    message.style.fontWeight = "bold";
+    message.style.marginTop = "5px";
+    document.getElementById("answer-container").appendChild(message);
+// this removes the correct message after half a second
+    setTimeout(() => {
+      message.parentNode.removeChild(message);
+    }, 500);
   } else {
-    alert("Incorrect!");
+    let message = document.createElement("answer");
+    message.textContent = "Incorrect!";
+    message.style.color = "red";
+    message.style.fontWeight = "bold";
+    message.style.fontWeight = "5px";
+    document.getElementById("answer-container").appendChild(message);
     timeleft -=5;
+// this removes the incorrect message after half a second
+    setTimeout(() => {
+      message.parentNode.removeChild(message);
+    }, 500);
   }
-
+  
   currentQuestion++;
   if (currentQuestion < questions.length) {
     displayQuestion();
