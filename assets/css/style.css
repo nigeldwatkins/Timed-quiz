@@ -21,11 +21,12 @@ body {
 
 .container {
     display: block;
-    margin-left: 65px;
+    margin-left: 15px;
     text-align: center;
     box-shadow: 10px 10px 5px lightslategrey;
-    width: 60 vw;
+    width: 150 px;
+    height: 25 px;  
     transition: .3s;
-    padding: 25px;
-    background-color: lightgrey;
+    padding: 100px;
+    background-color: lightgrey; 
 }
