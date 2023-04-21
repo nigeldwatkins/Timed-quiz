@@ -12,10 +12,11 @@ const questions = [
 
 document.getElementById("start-btn").addEventListener("click", function() {
   countdownTimer = setInterval(function() {
-    timeleft--;
-    document.getElementById("timer").innerHTML = timeleft;
     
-    if (timeleft < 0) {
+    if (timeleft > 0) {
+      timeleft--;
+      document.getElementById("timer").innerHTML = timeleft; 
+    } else {
       clearInterval(countdownTimer);
       alert("Quiz timer up!");
     }
@@ -23,6 +24,7 @@ document.getElementById("start-btn").addEventListener("click", function() {
 
   const quizContainer = document.getElementById("container");
   const startButton = document.getElementById("start-btn");
+  const quizInstructions = document.getElementById("quiz-instructions");
   const questionElement = document.getElementById("quiz-questions");
   const answersElement = document.getElementById("quiz-answers");
 
@@ -30,6 +32,8 @@ document.getElementById("start-btn").addEventListener("click", function() {
 
   function startQuiz() {
     startButton.style.display = "none";
+  // Removing paragraph
+    quizInstructions.style.display= "none"; 
     displayQuestion();
   }
 

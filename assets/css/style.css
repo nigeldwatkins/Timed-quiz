@@ -23,9 +23,7 @@ body {
     display: block;
     margin-left: 15px;
     text-align: center;
-    box-shadow: 10px 10px 5px lightslategrey;
-    width: 150 px;
-    height: 25 px;  
+    box-shadow: 10px 10px 5px lightslategrey;  
     transition: .3s;
     padding: 100px;
     background-color: lightgrey; 
