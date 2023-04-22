@@ -26,7 +26,7 @@ const questions = [
   {
     question: "when I need to declare a variable, what does so?",
     choices: ["Declare", "NewVariable", "Var"],
-    answer: "var"
+    answer: "Var"
   },
   {
     question: "JavaScript is a __",
@@ -49,7 +49,7 @@ const questions = [
     answer: "True"
   },
   {
-    questions: "Which answer helps me pull an item from a document?",
+    question: "Which answer helps me pull an item from a document?",
     choices: ["document.createElement(file)", "document.getElementId(file)", "document.pullElementId(file)"],
     answer: "document.getElementID(file)"
   }
@@ -60,9 +60,11 @@ const startButton = document.getElementById("start-btn");
 const quizInstructions = document.getElementById("quiz-instructions");
 const questionElement = document.getElementById("quiz-questions");
 const answersElement = document.getElementById("quiz-answers");
+const highscoreElement =document.getElementById('high-scores');
 
 // Inserted "Timer:" and seconds for my countdown timer of 60 seconds
 startButton.addEventListener("click", function() {
+  quizStartTime = new Date(); // this will let me set my start time
   countdownTimer = setInterval(function() {
     if (timeleft > 0) {
       timeleft--;
@@ -105,6 +107,7 @@ function displayQuestion() {
   });
 }
 
+
 function checkAnswer(choice, answer) {
   if (choice === answer) {
    // Instead of an alert message for correct or wrong answers I want something more subtle
@@ -142,7 +145,24 @@ function checkAnswer(choice, answer) {
 
 function endQuiz() {
   clearInterval(countdownTimer);
-  alert("Quiz is over!");
+  var score = (timeleft + 5); // I want the score to be represented by the time that is left
+  // This allows the user to save their name and score on a new line but in the same pop up message
+  var name = prompt("Quiz is over! Your quiz score is:" + score +"\nEnter your name to submit your score:"); // Instead of alert I needed to add the variable name and set it as a prompt which will let the user enter their name and submit score
+  
+  var scores = JSON.parse(localStorage.getItem('scores')) || [];
+  scores.push({ name, score });
+  localStorage.setItem('scores', JSON.stringify(scores));
+
+  // display high scores
+  highscoreElement.innerHTML = '';
+  var highScores = JSON.parse(localStorage.getItem('scores')) || [];
+  highScores.sort((a, b) => b.score - a.score);
+  highScores.forEach(scoreObj => {
+    var scoreElement = document.createElement('li');
+    scoreElement.textContent = scoreObj.name + ': ' + scoreObj.score;
+    highscoreElement.appendChild(scoreElement);
+    renderLastRegistered();
+  });
 }
 
 
