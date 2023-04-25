@@ -19,3 +19,6 @@ https://stackoverflow.com/questions/69108119/how-can-i-use-localstorage-to-displ
 MSU files: https://git.bootcampcontent.com/Michigan-State-University/MSU-VIRT-FSF-PT-03-2023-U-LOLC
 
 
+## Author
+Nigel Watkins : https://github.com/nigeldwatkins
+
