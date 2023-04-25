@@ -31,6 +31,9 @@ Saving score with name to local storage:
 <img width="1440" alt="Screenshot 2023-04-25 at 3 00 45 AM" src="https://user-images.githubusercontent.com/128034266/234199090-9fbd9efe-e67d-4e14-af30-e163ed326959.png">
 
 
+# Github link
+https://github.com/nigeldwatkins/Timed-quiz
+
 
 ## Source
 
