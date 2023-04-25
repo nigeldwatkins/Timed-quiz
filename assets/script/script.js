@@ -1,6 +1,7 @@
 var timeleft = 60;
 var countdownTimer;
 var currentQuestion = 0;
+var addEventListener
 
 const questions = [
   {
@@ -56,14 +57,19 @@ const questions = [
 ];
 
 const quizContainer = document.getElementById("container");
-const startButton = document.getElementById("start-btn");
+const startButton = document.getElementById("startButton");
 const quizInstructions = document.getElementById("quiz-instructions");
 const questionElement = document.getElementById("quiz-questions");
 const answersElement = document.getElementById("quiz-answers");
 const highscoreElement =document.getElementById('high-scores');
+const scorelist = document.getElementById("list");
+
+
 
 // Inserted "Timer:" and seconds for my countdown timer of 60 seconds
-startButton.addEventListener("click", function() {
+if (startButton != null) {    // As I loaded my webpage I was getting a error with my addEventListener so I added this to make sure my code inside of the bracket will be executed if the startButton is not null is true.
+startButton.addEventListener("click", function()  {
+  console.log(startButton); 
   quizStartTime = new Date(); // this will let me set my start time
   countdownTimer = setInterval(function() {
     if (timeleft > 0) {
@@ -83,12 +89,16 @@ startButton.addEventListener("click", function() {
   // Need to call startQuiz direct to eliminate the double clicking problem I was having
   startQuiz();
 });
+}
+
 
 
 function startQuiz() {
   startButton.style.display = "none";
-  // Removing paragraph
-  quizInstructions.style.display= "none"; 
+  // Removing paragraph once start button is clicked and starting questions
+  quizInstructions.style.display = "none"; 
+  scorelist.style.display = "none"; 
+  questionElement.classList.remove("hidden");
   displayQuestion();
 }
 
@@ -145,26 +155,20 @@ function checkAnswer(choice, answer) {
 
 function endQuiz() {
   clearInterval(countdownTimer);
-  var score = (timeleft + 5); // I want the score to be represented by the time that is left
-  // This allows the user to save their name and score on a new line but in the same pop up message
-  var name = prompt("Quiz is over! Your quiz score is:" + score +"\nEnter your name to submit your score:"); // Instead of alert I needed to add the variable name and set it as a prompt which will let the user enter their name and submit score
-  
-  var scores = JSON.parse(localStorage.getItem('scores')) || [];
-  scores.push({ name, score });
-  localStorage.setItem('scores', JSON.stringify(scores));
+  var score = (timeleft + 5);
+  var name = prompt("Quiz is over! Your quiz score is: " + score + "\nEnter your name to submit your score:");
+  var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+  highScores.push({ name: name, score: score });
+  localStorage.setItem("highScores", JSON.stringify(highScores));
 
-  // display high scores
-  highscoreElement.innerHTML = '';
-  var highScores = JSON.parse(localStorage.getItem('scores')) || [];
-  highScores.sort((a, b) => b.score - a.score);
-  highScores.forEach(scoreObj => {
-    var scoreElement = document.createElement('li');
-    scoreElement.textContent = scoreObj.name + ': ' + scoreObj.score;
-    highscoreElement.appendChild(scoreElement);
-    renderLastRegistered();
-  });
+  // hide the question and answers elements
+  questionElement.style.display = "none";
+  answersElement.style.display = "none";
+  // showing highscore link at the end of the quiz
+  scorelist.style.display = "inline";
 }
 
 
- 
+
+
 

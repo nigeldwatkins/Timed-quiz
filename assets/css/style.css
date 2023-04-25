@@ -20,6 +20,7 @@ body {
 }
 
 .container {
+    position: relative;
     display: block;
     margin-left: 15px;
     text-align: center;
@@ -29,25 +30,15 @@ body {
     background-color: lightgrey; 
 }
 
-#high-scores {
-    margin-top: 20px;
-  }
-  
-  #high-scores h2 {
-    margin-bottom: 10px;
-  }
-  
-  #high-scores-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  #high-scores-list li {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-  
-  #quiz-answers p {
-    margin-top: 5px;
-  }
+.scorelist {
+    position: absolute; 
+    left: 0;
+    top: 0; 
+    padding: 10px;
+    font-size: medium; 
+}
+
+.list {
+    color: blue;
+}
+    
